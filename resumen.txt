@@ -1,0 +1,25 @@
+BUSQUEDA 1:
+n distinto de 0: en CHOFER agrupamos por nit empresa, ponemos un where fecha nacimiento entre f1 y f2,
+hacemos having count(*)=n y eso nos devuelve los nit
+
+n=0: es como preguntar:"deme los nit de los que NO cumplen que tienen 1 o mas choferes que nacieron entre f1,f2)
+cojemos todos los NIT de EMPRESA que nNO esten en la siguiente consulta:
+en CHOFER agrupamos por nit empresa, ponemos un where fecha nacimiento entre f1 y f2,
+hacemos having count(*)>=1, asi obtenemos los que tienen uno o mas, eso nos devuelve una lista
+
+BUSQUEDA 2:
+n1 distinto de 0: en CHOFER se hace un group by por empresa rival, se pone la condicion de que sea
+menor o igual a n2 y mayor o igual a n1 
+n1=0: se hace igual que arriba solo que ahora la condicion es que sea mayor a n2, eso nos devuelve los nits que no cumplen
+y llamamos  a todos los nit de EMPRESA si no estan en la anterior consulta:
+ya que los nit de empresa que tienen 0 choferes asociados no aparecen en CHOFER
+
+PRIMERA CONSULTA:  hacemos una subconsulta donde vamos a CHOFER, agrupamos por id empresa, miramos que su  count(*) sea>= a 3
+y que SUM(salario) sea mayor a 1000, eso nos devuelve una lista de id empresa, nuestra empresa debe estar ahi,ademas miramos
+que su id gremio sea no nulo y que su gremio no aparezca en CHOFER
+
+SEGUNDA CONSULTA:
+hacemos un triple producto cartesiano y linkeamos al chofer con su gremio y empresa
+y miramos si id gremio de empresa es igual al id fremio del chofer
+y que su saldo sea mayor al telefono del gremioo
+
